@@ -36,14 +36,16 @@ Future<T> showSlideDialog<T>({
     transitionDuration: transitionDuration,
     transitionBuilder: (context, animation1, animation2, widget) {
       final curvedValue = Curves.easeInOut.transform(animation1.value) - 1.0;
-      return Transform(
-        transform: Matrix4.translationValues(0.0, curvedValue * -300, 0.0),
-        child: Opacity(
-          opacity: animation1.value,
-          child: SlideDialog(
-            child: child,
-            pillColor: pillColor ?? Colors.blueGrey[200],
-            backgroundColor: backgroundColor ?? Theme.of(context).canvasColor,
+      return SingleChildScrollView(
+        child: Transform(
+          transform: Matrix4.translationValues(0.0, curvedValue * -300, 0.0),
+          child: Opacity(
+            opacity: animation1.value,
+            child: SlideDialog(
+              child: child,
+              pillColor: pillColor ?? Colors.blueGrey[200],
+              backgroundColor: backgroundColor ?? Theme.of(context).canvasColor,
+            ),
           ),
         ),
       );
